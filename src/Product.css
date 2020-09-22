@@ -24,8 +24,14 @@
 }
 
 .product__info {
+  text-align: left;
   height: 100px;
   margin-bottom: 15px;
+}
+
+.product__rating {
+  color: #ffa41c;
+  display: flex;
 }
 
 .product__addToCart {

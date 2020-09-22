@@ -13,7 +13,12 @@ function Home() {
         />
 
         <div className="home__row">
-          <Product />
+          <Product
+            title="Casio Men's MDV106-1AV 200M Duro Analog Watch, Black"
+            price="65.25"
+            rating={5}
+            image="https://images-na.ssl-images-amazon.com/images/I/91jXI3HY2nL._AC_UY879_.jpg"
+          />
           <Product />
         </div>
         <div className="home__row">
