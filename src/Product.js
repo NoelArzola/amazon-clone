@@ -22,7 +22,7 @@ function Product({ id, title, price, rating, image }) {
 
       <img src={image} alt="" />
 
-      <button className="product__addToCart">Add to Basket</button>
+      <button className="product__addToCart">Add to Cart</button>
 
       <button className="product__buyNow">Buy Now</button>
     </div>
