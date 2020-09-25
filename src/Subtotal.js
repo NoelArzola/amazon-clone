@@ -13,7 +13,7 @@ function Subtotal() {
         renderText={(value) => (
           <>
             <p>
-              Subtotal ({basket.length}) items): <strong>{value}</strong>{" "}
+              Subtotal ({basket.length} items): <strong>{value}</strong>{" "}
               {/*Need to have this singular when 1 item is in there*/}
             </p>
             <small className="subtotal__gift">
