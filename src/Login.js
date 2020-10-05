@@ -67,9 +67,9 @@ function Login() {
         </form>
 
         <p className="login__legalese">
-          By continuing, you agree to AMAZON FAKE CLONE Conditions of Use and
-          Privacy Notice. Please see our Privacy Notice, our Cookies Notice and
-          our Interest-Based Ads Notice.
+          By continuing, you agree to the AMAZON FAKE CLONE Conditions of Use
+          and Privacy Notice. Please see our Privacy Notice, our Cookies Notice
+          and our Interest-Based Ads Notice.
         </p>
 
         <button
