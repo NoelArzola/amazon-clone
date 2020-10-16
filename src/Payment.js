@@ -63,7 +63,7 @@ function Payment() {
 
   const handleChange = (event) => {
     setDisabled(event.empty);
-    setError(event.error ? event.error.message : "Hello");
+    setError(event.error ? event.error.message : "");
   };
 
   return (
