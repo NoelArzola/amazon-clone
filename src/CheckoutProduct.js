@@ -4,7 +4,15 @@ import StarIcon from "@material-ui/icons/Star";
 import { useStateValue } from "./StateProvider";
 import Product from "./Product";
 
-function CheckoutProduct({ id, image, title, price, rating, hideButton }) {
+function CheckoutProduct({
+  id,
+  image,
+  title,
+  price,
+  rating,
+  hideButton,
+  quantity,
+}) {
   // eslint-disable-next-line no-unused-vars
   const [{ basket }, dispatch] = useStateValue();
 
@@ -35,7 +43,25 @@ function CheckoutProduct({ id, image, title, price, rating, hideButton }) {
             ))}
         </div>
         {!hideButton && (
-          <button onClick={removeFromBasket}>Remove from Cart</button>
+          <div>
+            <button onClick={removeFromBasket}>Remove from Cart</button>
+            <select
+              name="Quantity"
+              id=""
+              value={quantity > 1 ? `Qty: ${quantity}` : `Qty: 1`}
+            >
+              <option>1</option>
+              <option>2</option>
+              <option>3</option>
+              <option>4</option>
+              <option>5</option>
+              <option>6</option>
+              <option>7</option>
+              <option>8</option>
+              <option>9</option>
+              <option>10</option>
+            </select>
+          </div>
         )}
       </div>
     </div>
