@@ -18,7 +18,10 @@ function Header({ city, stateName }) {
 
   return (
     <header>
-      <SecondaryHeader city={city} stateName={stateName} />
+      {city && stateName && (
+        <SecondaryHeader city={city} stateName={stateName} />
+      )}
+
       <nav className="header">
         <Link to="/" className="cta">
           <img
@@ -28,10 +31,12 @@ function Header({ city, stateName }) {
           />
         </Link>
 
-        <div className="header__option location">
-          <span className="header__optionLineOne">{`Delivering to ${city}`}</span>{" "}
-          {<span className="header__optionLineTwo">{stateName}</span>}
-        </div>
+        {city && stateName && (
+          <div className="header__option location">
+            <span className="header__optionLineOne">{`Delivering to ${city}`}</span>{" "}
+            {<span className="header__optionLineTwo">{stateName}</span>}
+          </div>
+        )}
 
         <div className="header__search">
           <input className="header__searchInput" type="text" />
