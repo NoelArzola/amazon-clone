@@ -3,7 +3,7 @@ import "./Product.css";
 import StarIcon from "@material-ui/icons/Star";
 import { useStateValue } from "./StateProvider";
 
-function Product({ id, title, price, rating, image, quantity }) {
+function Product({ id, title, price, rating, image }) {
   const [{ basket }, dispatch] = useStateValue();
   // console.log("this is the basket >>>", basket);
   const addToBasket = () => {
@@ -16,7 +16,6 @@ function Product({ id, title, price, rating, image, quantity }) {
         image: image,
         price: price,
         rating: rating,
-        quantity,
       },
     });
   };

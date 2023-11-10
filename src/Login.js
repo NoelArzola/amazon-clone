@@ -7,8 +7,10 @@ function Login() {
   const history = useHistory();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
   const signIn = (e) => {
     e.preventDefault();
+
     auth
       .signInWithEmailAndPassword(email, password)
       .then((auth) => {
@@ -16,6 +18,7 @@ function Login() {
       })
       .catch((error) => alert(error.message));
   };
+
   const register = (e) => {
     e.preventDefault();
 
@@ -24,7 +27,8 @@ function Login() {
       .then((auth) => {
         // it successfully created a new user with email and password
         console.log(auth);
-        if (auth) {
+        const user = auth.user;
+        if (user) {
           history.push("/");
         }
       })

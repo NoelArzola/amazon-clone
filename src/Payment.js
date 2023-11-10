@@ -36,12 +36,11 @@ function Payment() {
     getClientSecret();
   }, [basket]);
 
-  console.log("The Secret IS >>>", clientSecret);
-
   const handleSubmit = async (event) => {
     // Do all the fancy Stripe stuff
     event.preventDefault();
     setProcessing(true);
+
     const payload = await stripe
       .confirmCardPayment(clientSecret, {
         payment_method: {
@@ -50,7 +49,6 @@ function Payment() {
       })
       .then(({ paymentIntent }) => {
         // paymentIntent = payment confirmation
-
         db.collection("users")
           .doc(user?.uid)
           .collection("orders")
@@ -91,7 +89,7 @@ function Payment() {
           <div className="payment__address">
             <p>{user?.email}</p>
             <p>123 React Lane</p>
-            <p>Belpre, OH</p>
+            <p>Belpre, OH 45714</p>
           </div>
         </div>
         <div className="payment__section">
@@ -99,6 +97,7 @@ function Payment() {
           <div className="payment__items">
             {basket.map((item) => (
               <CheckoutProduct
+                key={item.id}
                 id={item.id}
                 title={item.title}
                 image={item.image}
