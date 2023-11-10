@@ -118,7 +118,7 @@ function Payment() {
                 <CurrencyFormat
                   renderText={(value) => (
                     <>
-                      <h3>Order Total:{value}</h3>
+                      <h3>Order Total: {value}</h3>
                     </>
                   )}
                   decimalScale={2}
@@ -128,7 +128,7 @@ function Payment() {
                   prefix={"$"}
                 />
                 <button disabled={processing || disabled || succeeded}>
-                  <span>{processing ? <p>Processing</p> : "Buy now"}</span>
+                  <span>{processing ? <p>Processing...</p> : "Purchase"}</span>
                 </button>
               </div>
 

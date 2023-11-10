@@ -23,10 +23,6 @@ function CheckoutProduct({ id, image, title, price, rating, hideButton }) {
 
       <div className="checkoutProduct__info">
         <p className="checkoutProduct__title">{title}</p>
-        <p className="checkoutProduct__price">
-          <small>$</small>
-          <strong>{price}</strong>
-        </p>
         <div className="checkoutProduct__rating">
           {Array(rating)
             .fill()
@@ -34,6 +30,10 @@ function CheckoutProduct({ id, image, title, price, rating, hideButton }) {
               <p>{<StarIcon />}</p>
             ))}
         </div>
+        <p className="checkoutProduct__price">
+          <small>$</small>
+          <strong>{price}</strong>
+        </p>
         {!hideButton && (
           <div>
             <button onClick={removeFromBasket}>Remove from Cart</button>

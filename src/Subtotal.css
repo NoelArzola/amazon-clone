@@ -28,3 +28,7 @@
   font-size: 13px;
   width: 100%;
 }
+
+.subtotal > button:hover {
+  background: #ffa41c;
+}

@@ -2,20 +2,31 @@
   background-color: white;
 }
 
+.payment__container {
+  height: 100%;
+}
+
 .payment__container > h1 {
   text-align: center;
   padding: 10px;
   font-weight: 400;
   background-color: rgb(234, 237, 237);
   border-bottom: 1px solid lightgray;
+  color: black;
 }
 
 .payment__container > h1 a {
   text-decoration: none;
+  color: black;
+}
+
+.payment__container > h1 a:hover {
+  text-decoration: underline;
 }
 
 .payment__section {
   display: flex;
+  flex-direction: row;
   padding: 20px;
   margin: 0 20px;
   border-bottom: 1px solid lightgray;
@@ -45,12 +56,48 @@
 
 .payment__details > form > div > button {
   background: #f0c14b;
-  border-radius: 2px;
+  border-radius: 50px;
   width: 100%;
-  height: 30px;
+  height: 40px;
   border: 1px solid;
   font-weight: bolder;
-  margin-top: 10px;
+  margin-top: 1rem;
   border-color: #a88734 #9c7e31 #846a29;
   color: #111;
+  cursor: pointer;
+}
+
+.payment__details > form > div > button:hover {
+  background: #ffa41c;
+}
+
+.payment__priceContainer h3 {
+  margin-top: 0.75rem;
+}
+
+@media screen and (max-width: 767px) {
+  .payment__container {
+    height: 100%;
+  }
+
+  .payment__items {
+    margin-left: 0;
+  }
+  .payment__section .checkoutProduct {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .payment__section .checkoutProduct__info {
+    padding-left: 0;
+    margin-top: 1rem;
+  }
+
+  .payment__section {
+    flex-direction: column;
+  }
+
+  .payment__title {
+    margin-bottom: 1rem;
+  }
 }

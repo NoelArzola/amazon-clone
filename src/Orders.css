@@ -1,7 +1,19 @@
 .orders {
-  padding: 20px 80px;
+  padding: 0.5rem;
 }
 
 .orders > h1 {
   margin: 30px;
+}
+
+@media screen and (min-width: 768px) {
+  .orders {
+    padding: 0 1rem;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .orders {
+    padding: 20px 80px;
+  }
 }

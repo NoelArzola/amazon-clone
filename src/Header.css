@@ -1,3 +1,14 @@
+.mobileCta {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #131921;
+}
+
+.cta {
+  display: none;
+}
+
 .header {
   height: 60px;
   display: flex;
@@ -20,6 +31,7 @@
   flex: 1;
   align-items: center;
   border-radius: 24px;
+  margin: 0 0.5rem;
 }
 
 .header__searchInput {
@@ -42,12 +54,21 @@
   justify-content: space-evenly;
 }
 
+.loginSignup {
+  display: none;
+}
+
 .header__option {
   color: white;
   display: flex;
   flex-direction: column;
   margin-left: 10px;
   margin-right: 10px;
+}
+
+.header__option__orders,
+.header__option.location {
+  display: none;
 }
 
 .header__optionLineOne {
@@ -74,4 +95,37 @@
 
 a {
   text-decoration: none;
+}
+
+.mobileLocation {
+  margin: 0;
+  background-color: #232f3e;
+  padding: 0.5rem 1rem;
+}
+
+@media screen and (min-width: 768px) {
+  .cta {
+    display: block;
+  }
+
+  .mobileCta {
+    display: none;
+  }
+
+  .header__search {
+    margin: 0;
+  }
+
+  .header__option__orders,
+  .header__option.location {
+    display: flex;
+  }
+
+  .loginSignup {
+    display: block;
+  }
+
+  .mobileLocation {
+    display: none;
+  }
 }

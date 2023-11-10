@@ -1,0 +1,38 @@
+.secondaryHeader {
+  background-color: #131921;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  color: white;
+}
+
+.secondaryHeader a {
+  text-decoration: none;
+}
+
+.secondaryHeader__option {
+  color: white;
+  display: flex;
+  flex-direction: column;
+}
+
+.secondaryHeader__optionLineOne {
+  font-size: 12px;
+}
+
+.secondaryHeader__optionLineTwo {
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.secondaryHeader .orders {
+  color: white;
+  padding: 0;
+}
+
+@media screen and (min-width: 768px) {
+  .secondaryHeader {
+    display: none;
+  }
+}

@@ -7,15 +7,11 @@
 }
 
 .login__logo {
-  margin-top: 20px;
-  margin-bottom: 20px;
-  object-fit: contain;
-  width: 100px;
-  margin-right: auto;
-  margin-left: auto;
+  display: none;
 }
 
 .login__container {
+  margin-top: 1.25rem;
   width: 300px;
   height: fit-content;
   display: flex;
@@ -38,7 +34,9 @@
   height: 30px;
   margin-bottom: 10px;
   background-color: white;
-  width: 98%;
+  width: 100%;
+  max-width: 260px;
+  padding: 0 1rem;
 }
 
 .login__container > p {
@@ -63,4 +61,20 @@
   border: 1px solid;
   margin-top: 10px;
   border-color: darkgray;
+}
+
+@media screen and (min-width: 768px) {
+  .login__logo {
+    display: block;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    object-fit: contain;
+    width: 100px;
+    margin-right: auto;
+    margin-left: auto;
+  }
+
+  .login__container {
+    margin-top: 0;
+  }
 }

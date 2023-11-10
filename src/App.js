@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "./App.css";
 import Header from "./Header";
 import Home from "./Home";
@@ -16,6 +16,8 @@ const promise = loadStripe("pk_test_3e0ixkUM0GkeLQ44AxWTXESQ00jsrkAhFw");
 
 function App() {
   const [{}, dispatch] = useStateValue();
+  const [city, setCity] = useState(null);
+  const [stateName, setStateName] = useState(null);
 
   useEffect(() => {
     // This will only run once when the app component loads...
@@ -39,11 +41,34 @@ function App() {
     });
   }, []);
 
+  const parseGeoData = (data) => {
+    if (!data) return;
+    setCity(data.city.name);
+    setStateName(data.state.name);
+  };
+
+  const requestOptions = {
+    method: "GET",
+  };
+
+  const geoData = async () => {
+    const data = await fetch(
+      "https://api.geoapify.com/v1/ipinfo?&apiKey=583e8c60a9ca4bbbaaee312a3054cce9",
+      requestOptions
+    )
+      .then((response) => response.json())
+      .catch((error) => console.log("error", error));
+
+    parseGeoData(data);
+  };
+
+  geoData();
+
   return (
     // BEM
     <Router>
       <div className="app">
-        <Header />
+        <Header city={city} stateName={stateName} />
         <Switch>
           <Route path="/login">
             <Login />
