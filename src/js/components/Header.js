@@ -1,10 +1,10 @@
-import React, { useState } from "react";
-import "./Header.css";
+import React from "react";
+import "../../css/Header.css";
 import SearchIcon from "@material-ui/icons/Search";
 import ShoppingCartOutlinedIcon from "@material-ui/icons/ShoppingCartOutlined";
 import { Link } from "react-router-dom";
-import { useStateValue } from "./StateProvider";
-import { auth } from "./firebase";
+import { useStateValue } from "../../StateProvider";
+import { auth } from "../../firebase";
 import { SecondaryHeader } from "./SecondaryHeader";
 
 function Header({ city, stateName }) {

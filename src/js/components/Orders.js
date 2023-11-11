@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { db } from "./firebase";
+import { db } from "../../firebase";
 import Order from "./Order";
-import "./Orders.css";
-import { useStateValue } from "./StateProvider";
+import "../../css/Orders.css";
+import { useStateValue } from "../../StateProvider";
 
 function Orders() {
   // eslint-disable-next-line no-unused-vars
