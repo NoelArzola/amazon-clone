@@ -8,25 +8,25 @@ function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const signIn = (e) => {
+  const signIn = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
 
     auth
       .signInWithEmailAndPassword(email, password)
-      .then((auth) => {
+      .then(() => {
         history.push("/");
       })
       .catch((error) => alert(error.message));
   };
 
-  const register = (e) => {
+  const register = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
 
     auth
       .createUserWithEmailAndPassword(email, password)
       .then((auth) => {
         // it successfully created a new user with email and password
-        console.log(auth);
+        // console.log(auth);
         const user = auth.user;
         if (user) {
           history.push("/");

@@ -9,6 +9,14 @@ import { getBasketTotal } from "../../reducer";
 import axios from "../../axios";
 import { db } from "../../firebase";
 
+interface BasketItem {
+  id: string;
+  title: string;
+  image: string;
+  price: number;
+  rating: number;
+}
+
 function Payment() {
   const [{ basket, user }, dispatch] = useStateValue();
   const history = useHistory();
@@ -17,18 +25,15 @@ function Payment() {
   const elements = useElements();
 
   const [succeeded, setSucceeded] = useState(false);
-  const [processing, setProcessing] = useState("");
-  const [error, setError] = useState(null);
+  const [processing, setProcessing] = useState<boolean | string>(false);
+  const [error, setError] = useState<any>(null);
   const [disabled, setDisabled] = useState(true);
-  const [clientSecret, setClientSecret] = useState(true);
+  const [clientSecret, setClientSecret] = useState<string | boolean>(true);
 
   useEffect(() => {
-    // Generate the special Stripe secret which allows us to charge a customer
     const getClientSecret = async () => {
-      const response = await axios({
-        method: "post",
-        // Stripe expects the total in currencies subunits
-        url: `/payments/create?total=${getBasketTotal(basket) * 100}`,
+      const response = await axios.post("/payments/create", {
+        total: getBasketTotal(basket) * 100,
       });
       setClientSecret(response.data.clientSecret);
     };
@@ -36,42 +41,49 @@ function Payment() {
     getClientSecret();
   }, [basket]);
 
-  const handleSubmit = async (event) => {
-    // Do all the fancy Stripe stuff
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setProcessing(true);
 
-    const payload = await stripe
-      .confirmCardPayment(clientSecret, {
-        payment_method: {
-          card: elements.getElement(CardElement),
-        },
-      })
-      .then(({ paymentIntent }) => {
-        // paymentIntent = payment confirmation
+    if (!stripe || !elements || !dispatch) {
+      return;
+    }
+
+    const payload = await stripe.confirmCardPayment(clientSecret as string, {
+      payment_method: {
+        card: elements.getElement(CardElement)!,
+      },
+    });
+
+    if (payload.error) {
+      setError(`Payment failed: ${payload.error.message}`);
+      setProcessing(false);
+    } else {
+      setError(null);
+      setProcessing(false);
+      setSucceeded(true);
+
+      if (user && dispatch) {
         db.collection("users")
-          .doc(user?.uid)
+          .doc(user.uid)
           .collection("orders")
-          .doc(paymentIntent.id)
+          .doc(payload.paymentIntent!.id)
           .set({
             basket: basket,
-            amount: paymentIntent.amount,
-            created: paymentIntent.created,
+            amount: payload.paymentIntent!.amount,
+            created: payload.paymentIntent!.created,
           });
-
-        setSucceeded(true);
-        setError(null);
-        setProcessing(false);
 
         dispatch({
           type: "EMPTY_BASKET",
         });
 
         history.replace("/orders");
-      });
+      }
+    }
   };
 
-  const handleChange = (event) => {
+  const handleChange = (event: any) => {
     setDisabled(event.empty);
     setError(event.error ? event.error.message : "");
   };
@@ -89,13 +101,13 @@ function Payment() {
           <div className="payment__address">
             <p>{user?.email}</p>
             <p>123 React Lane</p>
-            <p>Belpre, OH 45714</p>
+            <p>Vienna, WV 26105</p>
           </div>
         </div>
         <div className="payment__section">
           <h3>Review items and delivery</h3>
           <div className="payment__items">
-            {basket.map((item) => (
+            {basket.map((item: BasketItem) => (
               <CheckoutProduct
                 key={item.id}
                 id={item.id}
@@ -116,18 +128,16 @@ function Payment() {
               <CardElement onChange={handleChange} />
               <div className="payment__priceContainer">
                 <CurrencyFormat
-                  renderText={(value) => (
-                    <>
-                      <h3>Order Total: {value}</h3>
-                    </>
-                  )}
+                  renderText={(value) => <h3>Order Total: {value}</h3>}
                   decimalScale={2}
-                  value={getBasketTotal(basket)} // part of hw
+                  value={getBasketTotal(basket)}
                   displayType={"text"}
                   thousandSeparator={true}
                   prefix={"$"}
                 />
-                <button disabled={processing || disabled || succeeded}>
+                <button
+                  disabled={processing || disabled || succeeded ? true : false}
+                >
                   <span>{processing ? <p>Processing...</p> : "Purchase"}</span>
                 </button>
               </div>

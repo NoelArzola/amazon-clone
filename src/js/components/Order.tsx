@@ -1,10 +1,11 @@
 import moment from "moment";
-import React from "react";
+import React, { useRef } from "react";
 import CurrencyFormat from "react-currency-format";
 import CheckoutProduct from "./CheckoutProduct";
 import "../../css/Order.css";
 
-function Order({ order }) {
+function Order({ order }: { order: any }) {
+  const ref = useRef();
   return (
     <div className="order">
       <h2>Order</h2>
@@ -16,8 +17,9 @@ function Order({ order }) {
         <small>{order.id}</small>
       </p>
 
-      {order.data.basket?.map((item) => (
+      {order.data.basket?.map((item: any, index: number) => (
         <CheckoutProduct
+          key={`${item.id}-${index}`}
           id={item.id}
           title={item.title}
           image={item.image}

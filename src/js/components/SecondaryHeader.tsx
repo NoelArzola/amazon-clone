@@ -4,7 +4,7 @@ import { useStateValue } from "../../StateProvider";
 import { auth } from "../../firebase";
 import "../../css/SecondaryHeader.css";
 
-export const SecondaryHeader = (city, stateName) => {
+export const SecondaryHeader = () => {
   const [{ user }] = useStateValue();
 
   const handleAuthentication = () => {
@@ -22,7 +22,7 @@ export const SecondaryHeader = (city, stateName) => {
         />
       </Link>
       <div className="secondaryHeader">
-        <Link to={!user && "/login"} className="mobileloginSignup">
+        <Link to={!user ? "/login" : ""} className="mobileloginSignup">
           <div
             className="secondaryHeader__option"
             onClick={handleAuthentication}

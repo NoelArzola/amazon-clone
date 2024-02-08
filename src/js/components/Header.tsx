@@ -7,7 +7,12 @@ import { useStateValue } from "../../StateProvider";
 import { auth } from "../../firebase";
 import { SecondaryHeader } from "./SecondaryHeader";
 
-function Header({ city, stateName }) {
+interface HeaderProps {
+  city: string | null;
+  stateName: string | null;
+}
+
+const Header: React.FC<HeaderProps> = ({ city, stateName }) => {
   const [{ basket, user }] = useStateValue();
 
   const handleAuthentication = () => {
@@ -18,9 +23,7 @@ function Header({ city, stateName }) {
 
   return (
     <header>
-      {city && stateName && (
-        <SecondaryHeader city={city} stateName={stateName} />
-      )}
+      {city && stateName && <SecondaryHeader />}
 
       <nav className="header">
         <Link to="/" className="cta">
@@ -44,7 +47,7 @@ function Header({ city, stateName }) {
         </div>
 
         <div className="header__nav">
-          <Link to={!user && "/login"} className="loginSignup">
+          <Link to={!user ? "/login" : ""} className="loginSignup">
             <div className="header__option" onClick={handleAuthentication}>
               <span className="header__optionLineOne">
                 {user ? <span>Hello, {user.email}</span> : "Hello, Guest"}
@@ -74,12 +77,12 @@ function Header({ city, stateName }) {
       </nav>
       <div className="header__option mobileLocation">
         <span className="header__optionLineOne">
-          {`Delivering to ${city}, `}
+          {city ? `Delivering to ${city}, ` : ""}
           <span className="">{stateName}</span>
         </span>
       </div>
     </header>
   );
-}
+};
 
 export default Header;

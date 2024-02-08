@@ -3,7 +3,25 @@ import "../../css/Product.css";
 import StarIcon from "@material-ui/icons/Star";
 import { useStateValue } from "../../StateProvider";
 
-function Product({ id, title, dollars, cents, rating, image, price }) {
+interface ProductProps {
+  id: string;
+  title: string;
+  dollars: number;
+  cents: number;
+  rating: number;
+  image: string;
+  price: number;
+}
+
+function Product({
+  id,
+  title,
+  dollars,
+  cents,
+  rating,
+  image,
+  price,
+}: ProductProps) {
   const [{ basket }, dispatch] = useStateValue();
   // console.log("this is the basket >>>", basket);
   const addToBasket = () => {
@@ -27,9 +45,11 @@ function Product({ id, title, dollars, cents, rating, image, price }) {
         <p>{title}</p>
         <div className="product__rating">
           {Array(rating)
-            .fill()
+            .fill(null) // Providing a default value for fill
             .map((_, i) => (
-              <p>{<StarIcon />}</p>
+              <p key={i}>
+                <StarIcon />
+              </p>
             ))}
         </div>
         <p className="product__price">
