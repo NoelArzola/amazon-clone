@@ -16,11 +16,11 @@ function Checkout() {
           alt=""
         />
         <div>
-          <h3>{user ? <span>Hello, {user?.email}</span> : "Hello, Guest"}</h3>
+          <h3>{user ? `Hello, ${user.email}` : "Hello, Guest"}</h3>
           <h2 className="checkout__title">Your shopping Cart</h2>
           <div className="checkout__container">
             <div className="checkout__left">
-              {basket.map((item) => (
+              {basket.map((item: any) => (
                 <CheckoutProduct
                   key={item.id}
                   id={item.id}

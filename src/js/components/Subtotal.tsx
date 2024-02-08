@@ -5,18 +5,27 @@ import { useStateValue } from "../../StateProvider";
 import { getBasketTotal } from "../../reducer";
 import { useHistory } from "react-router-dom";
 
+interface BasketItem {
+  id: string;
+  title: string;
+  price: number;
+  quantity: number;
+}
+
+interface User {}
+
 function Subtotal() {
   const history = useHistory();
-  const [{ basket, user }] = useStateValue();
+  const [{ basket, user }] = useStateValue(); // Corrected here
 
   return (
     <div className="subtotal">
       <CurrencyFormat
-        renderText={(value) => (
+        renderText={(value: string) => (
           <>
             <p>
-              Subtotal ({basket.length} items): <strong>{value}</strong>{" "}
-              {/*Need to have this singular when 1 item is in there*/}
+              Subtotal ({basket.length} item{basket.length !== 1 ? "s" : ""}):{" "}
+              <strong>{value}</strong>{" "}
             </p>
             <small className="subtotal__gift">
               <input type="checkbox" /> This order contains a gift
@@ -24,14 +33,14 @@ function Subtotal() {
           </>
         )}
         decimalScale={2}
-        value={getBasketTotal(basket)} // part of hw
+        value={getBasketTotal(basket)}
         displayType={"text"}
         thousandSeparator={true}
         prefix={"$"}
       />
 
       <button
-        onClick={(e) =>
+        onClick={() =>
           user ? history.push("/payment") : history.push("/login")
         }
       >

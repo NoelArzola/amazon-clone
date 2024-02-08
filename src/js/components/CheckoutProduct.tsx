@@ -2,33 +2,46 @@ import React from "react";
 import "../../css/CheckoutProduct.css";
 import StarIcon from "@material-ui/icons/Star";
 import { useStateValue } from "../../StateProvider";
-import Product from "./Product";
 
-function CheckoutProduct({ id, image, title, price, rating, hideButton }) {
-  // eslint-disable-next-line no-unused-vars
+interface Props {
+  id: string;
+  image: string;
+  title: string;
+  price: number;
+  rating: number;
+  hideButton?: boolean;
+}
+
+function CheckoutProduct({
+  id,
+  image,
+  title,
+  price,
+  rating,
+  hideButton,
+}: Props) {
   const [{ basket }, dispatch] = useStateValue();
 
   const removeFromBasket = () => {
-    // remove the item from the basket
-
     dispatch({
       type: "REMOVE_FROM_BASKET",
-      id: id,
+      id,
     });
   };
 
   return (
-    <div className="checkoutProduct" key={Product.id}>
+    <div className="checkoutProduct" key={id}>
       <img className="checkoutProduct__image" src={image} alt="" />
 
       <div className="checkoutProduct__info">
         <p className="checkoutProduct__title">{title}</p>
         <div className="checkoutProduct__rating">
-          {Array(rating)
-            .fill()
-            .map((_, i) => (
-              <p>{<StarIcon />}</p>
-            ))}
+          {/* Generate star icons based on rating */}
+          {Array.from({ length: rating }, (_, i) => (
+            <p key={i}>
+              <StarIcon />
+            </p>
+          ))}
         </div>
         <p className="checkoutProduct__price">
           <small>$</small>

@@ -4,10 +4,13 @@ export const initialState = {
 };
 
 // Selector
-export const getBasketTotal = (basket) =>
-  basket?.reduce((amount, item) => item.price + amount, 0); // Tallies up basket prices adds amount, returns sum as a value
+export const getBasketTotal = (basket: any) =>
+  basket?.reduce(
+    (amount: number, item: any | string) => item.price + amount,
+    0
+  ); // Tallies up basket prices adds amount, returns sum as a value
 
-const reducer = (state, action) => {
+const reducer = (state: any, action: any) => {
   switch (action.type) {
     case "ADD_TO_BASKET":
       return {
@@ -17,7 +20,7 @@ const reducer = (state, action) => {
 
     case "REMOVE_FROM_BASKET":
       const index = state.basket.findIndex(
-        (basketItem) => basketItem.id === action.id
+        (basketItem: any) => basketItem.id === action.id
       );
       let newBasket = [...state.basket];
 
