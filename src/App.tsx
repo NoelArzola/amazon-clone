@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import "./App.css";
+import "./css/App.css";
 import Header from "./js/components/Header";
 import Home from "./js/components/Home";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
@@ -16,38 +16,40 @@ const promise = loadStripe("pk_test_3e0ixkUM0GkeLQ44AxWTXESQ00jsrkAhFw");
 
 function App() {
   const [{}, dispatch] = useStateValue();
-  const [city, setCity] = useState(null);
-  const [stateName, setStateName] = useState(null);
+  const [city, setCity] = useState<string | null>(null);
+  const [stateName, setStateName] = useState<string | null>(null);
 
   useEffect(() => {
     // This will only run once when the app component loads...
 
-    auth.onAuthStateChanged((authUser) => {
+    auth.onAuthStateChanged((authUser: any) => {
       console.log("The user is >>> ", authUser);
 
       if (authUser) {
         // The user was logged in / the user just logged in
-        dispatch({
-          type: "SET_USER",
-          user: authUser,
-        });
+        dispatch &&
+          dispatch({
+            type: "SET_USER",
+            user: authUser,
+          });
       } else {
         // The user is logged out
-        dispatch({
-          type: "SET_USER",
-          user: null,
-        });
+        dispatch &&
+          dispatch({
+            type: "SET_USER",
+            user: null,
+          });
       }
     });
   }, []);
 
-  const parseGeoData = (data) => {
+  const parseGeoData = (data: any) => {
     if (!data) return;
     setCity(data.city.name);
     setStateName(data.state.name);
   };
 
-  const requestOptions = {
+  const requestOptions: RequestInit = {
     method: "GET",
   };
 
